@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  [class^="number-slide"],
+  [class*=" number-slide"] {
+    background: grey;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 500;
+    height: 300px;
+    max-height: 100vh;
+  }
+  
+  .number-slide1 {
+    background: rgb(64, 175, 255);
+    background: linear-gradient(
+      128deg,
+      rgba(64, 175, 255, 1) 0%,
+      rgba(63, 97, 255, 1) 100%
+    );
+    display: flex;flex-direction: column;
+  }
+  
+
+  
