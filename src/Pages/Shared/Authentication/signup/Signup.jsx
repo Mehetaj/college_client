@@ -53,11 +53,11 @@ const Signup = () => {
 
     return (
         <div>
-            <div className='w-[1440px] mx-auto'>
+            <div className='lg:w-[1440px] mx-auto'>
                 <h1 className='text-2xl font-bold'>Find Out <span className='text-7xl text-orange-500'>.</span> </h1>
                 <div className='flex mt-16 items-center justify-around'>
-                    <img className='w-[654px] h-[550px]' src={img} alt="" />
-                    <div className='w-[360px] h-[688px] shadow-lg'>
+                    <img className='hidden lg:grid w-[654px] h-[550px]' src={img} alt="" />
+                    <div className='lg:w-[360px] h-[688px] shadow-lg'>
                         <form onSubmit={handleSubmit} className='p-10'>
                             <h1 className='text-3xl font-bold'>Get Started</h1>
                             <p className='mt-4 text-gray-400'>Already have an account?

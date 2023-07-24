@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../Firebase/fireabse.config';
 // import axios from 'axios';
 
@@ -8,6 +8,7 @@ export const AuthContext = createContext(null)
 const auth = getAuth(app)
 
 const GoogleProvider = new GoogleAuthProvider();
+const GithubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -30,6 +31,11 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, GoogleProvider)
     }
 
+    const githubSignIn = () => {
+        setLoading(true);
+        return signInWithPopup(auth, GithubProvider)
+    }
+
     const updateUserProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
             displayName: name
@@ -41,9 +47,14 @@ const AuthProvider = ({ children }) => {
         return signOut(auth)
     }
 
+    const resetPassword = (email) => {
+        sendPasswordResetEmail(auth, email)
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser)
+            setLoading(false)
 
             // get and set token
             // if (currentUser) {
@@ -57,7 +68,7 @@ const AuthProvider = ({ children }) => {
             //     localStorage.removeItem('access-token')
             // }
 
-            
+
         })
         return () => {
             return unsubscribe()
@@ -70,8 +81,10 @@ const AuthProvider = ({ children }) => {
         createUser,
         signIn,
         googleSignIn,
+        githubSignIn,
         logOut,
-        updateUserProfile
+        updateUserProfile,
+        resetPassword
     }
     return (
         <AuthContext.Provider value={authInfo}>

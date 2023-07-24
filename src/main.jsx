@@ -16,6 +16,10 @@ import Admission from './Pages/Admission/Admission';
 import Form from './Pages/Form/Form';
 import MyCollege from './Pages/MyCollege/MyCollege';
 import Review from './Pages/Review/Review';
+import Reset from './Pages/Shared/Authentication/Reset/Reset';
+import Profile from './Pages/Profile/Profile';
+import PrivateRoute from './PrivateRoute';
+import Error from './Pages/Shared/Error/Error';
 
 const router = createBrowserRouter([
   {
@@ -33,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: '/colleges/:_id',
         loader: ({ params }) => fetch(`http://localhost:4000/colleges/${params._id}`),
-        element: <College />
+        element: <PrivateRoute><College /></PrivateRoute>
       },
       {
         path: '/admission',
@@ -52,7 +56,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/review',
-        element: <Review />
+        element: <PrivateRoute><Review /></PrivateRoute>
+      },
+      {
+        path: '/profile',
+        element: <PrivateRoute><Profile /></PrivateRoute>
       }
     ]
   },
@@ -63,6 +71,14 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <Signup />
+  },
+  {
+    path: '/reset',
+    element: <Reset />
+  },
+  {
+    path: '*',
+    element: <Error />
   }
 ]);
 
